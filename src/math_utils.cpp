@@ -167,7 +167,7 @@ std::vector<double> movingMedian(const std::vector<double> &x, size_t n) {
 
 
 
-double modal_value(std::vector<double> values, unsigned ties, bool narm, std::default_random_engine rgen, std::uniform_real_distribution<double> dist) {
+double modal_value(std::vector<double> values, size_t ties, bool narm, std::default_random_engine rgen, std::uniform_real_distribution<double> dist) {
 
 	if (narm) {
 		na_omit(values);

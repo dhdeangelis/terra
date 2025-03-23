@@ -1022,7 +1022,7 @@ bool fix_date_line(SpatGeom &g, std::vector<double> &x, const std::vector<double
 
 
 
-SpatVector SpatVector::point_buffer(std::vector<double> d, unsigned quadsegs, bool no_multipolygons, bool wrap) {
+SpatVector SpatVector::point_buffer(std::vector<double> d, size_t quadsegs, bool no_multipolygons, bool wrap) {
 
 	SpatVector out;
 	out.reserve(size());
@@ -1199,7 +1199,7 @@ SpatGeom hullify(SpatVector b, bool ispoly) {
 	SpatVector part;
 	part.reserve(b.size());
 	for (size_t j =0; j<(b.size()-1); j++) {
-		std::vector<unsigned> range = {(unsigned)j, (unsigned)j+1};
+		std::vector<size_t> range = {j, j+1};
 		SpatVector g = b.subset_rows(range);
 		g = g.hull("convex");
 		part.addGeom(g.geoms[0]);
@@ -1209,7 +1209,7 @@ SpatGeom hullify(SpatVector b, bool ispoly) {
 }
 
 
-SpatVector lonlat_buf(SpatVector x, double dist, unsigned quadsegs, bool ispol, bool ishole) {
+SpatVector lonlat_buf(SpatVector x, double dist, size_t quadsegs, bool ispol, bool ishole) {
 
 /*
 	if ((x.extent.ymin > -60) && (x.extent.ymax < 60) && 
@@ -1280,10 +1280,10 @@ SpatVector lonlat_buf(SpatVector x, double dist, unsigned quadsegs, bool ispol, 
 }
 
 
-SpatVector SpatVector::buffer_lonlat(std::string vt, std::vector<double> d, unsigned quadsegs) {
+SpatVector SpatVector::buffer_lonlat(std::string vt, std::vector<double> d, size_t quadsegs) {
 
 	SpatVector out;
-	std::vector<unsigned> keep;
+	std::vector<size_t> keep;
 	keep.reserve(size());
 	if (vt == "points") {
 		return point_buffer(d, quadsegs, false, true);

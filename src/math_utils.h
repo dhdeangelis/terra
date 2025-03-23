@@ -21,7 +21,7 @@
 
 
 
-double modal_value(std::vector<double> values, unsigned ties, bool narm, std::default_random_engine rgen, std::uniform_real_distribution<double> dist);
+double modal_value(std::vector<double> values, size_t ties, bool narm, std::default_random_engine rgen, std::uniform_real_distribution<double> dist);
 
 void na_omit(std::vector<double> &x);
 

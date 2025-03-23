@@ -56,7 +56,7 @@ public:
 //	   set_values(_v);
 //	}
 	
-	SpatFactor subset(std::vector<unsigned> i);
+	SpatFactor subset(std::vector<size_t> i);
 	std::string getLabel(size_t i); 
 	std::vector<std::string> getLabels();
 	

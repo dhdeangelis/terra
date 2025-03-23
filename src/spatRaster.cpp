@@ -247,7 +247,7 @@ SpatRaster::SpatRaster(const SpatRaster &r) {
 
 
 
-SpatRaster SpatRaster::geometry(long nlyrs, bool properties, bool time, bool units, bool tags) {
+SpatRaster SpatRaster::geometry(size_t nlyrs, bool properties, bool time, bool units, bool tags) {
 	SpatRasterSource s;
 	//s.values.resize(0);
 	s.nrow = nrow();
@@ -257,7 +257,7 @@ SpatRaster SpatRaster::geometry(long nlyrs, bool properties, bool time, bool uni
 	//s.prj = prj;
 	s.memory = true;
 	s.hasValues = false;
-	long nl = nlyr();
+	size_t nl = nlyr();
 	bool keepnlyr = ((nlyrs == nl) || (nlyrs < 1));
 	nlyrs = (keepnlyr) ? nlyr(): nlyrs;
 
@@ -1563,7 +1563,7 @@ SpatRaster SpatRaster::dropLevels() {
 			for (size_t j=0; j<uv.size(); j++) {
 				uvi[j] = uv[j];
 			}
-			std::vector<long> isin;
+			std::vector<size_t> isin;
 			isin.reserve(n);
 			for (size_t j=0; j<n; j++) {
 				for (size_t k=0; k<uvi.size(); k++) {

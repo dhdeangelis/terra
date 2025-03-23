@@ -593,7 +593,7 @@ SpatRaster SpatRaster::arith_m(std::vector<double> x, std::string oper, std::vec
 	if (dim[0] < 2) {
 		return(arith(x, oper, reverse, false, opt));
 	}
-	if (dim[0] > ncell()) {
+	if (dim[0] > (size_t) ncell()) {
 		out.setError("incorrect matrix dimensions (nrow > ncell(x))"); 
 		return out;
 	}
@@ -1968,10 +1968,10 @@ std::vector<std::vector<double>> SpatRaster::where(std::string what, bool values
 						if (v[k] < val[j]) {
 							val[j] = v[k];
 							out[j].resize(0);
-							double cell = k - off + boff;
+							double cell = (double)(k - off + boff);
 							out[j].push_back(cell);
 						} else if (v[k] == val[j]) {
-							double cell = k - off + boff;
+							double cell = (double)(k - off + boff);
 							out[j].push_back(cell);
 						}
 					}
@@ -1982,10 +1982,10 @@ std::vector<std::vector<double>> SpatRaster::where(std::string what, bool values
 						if (v[k] > val[j]) {
 							val[j] = v[k];
 							out[j].resize(0);
-							double cell = k - off + boff;
+							double cell = (double)(k - off + boff);
 							out[j].push_back(cell);
 						} else if (v[k] == val[j]) {
-							double cell = k - off + boff;
+							double cell = (double)(k - off + boff);
 							out[j].push_back(cell);
 						}
 					}

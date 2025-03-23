@@ -116,7 +116,7 @@ bool SpatFactor::set_labels(std::vector<std::string> _labels) {
 
 
 
-SpatFactor SpatFactor::subset(std::vector<unsigned> i) {
+SpatFactor SpatFactor::subset(std::vector<size_t> i) {
 	SpatFactor out;
 	out.labels = labels;
 	size_t n = i.size();
@@ -129,7 +129,7 @@ SpatFactor SpatFactor::subset(std::vector<unsigned> i) {
 
 std::string SpatFactor::getLabel(size_t i) {
 	if (i < v.size()) {
-		unsigned j = v[i] - 1;
+		size_t j = v[i] - 1;
 		if (j < labels.size()) {
 			return labels[j];
 		}

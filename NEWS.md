@@ -9,6 +9,7 @@
 - `resample` on flipped SpatRasters failed. [#1760](https://github.com/rspatial/terra/issues/1760) by Andrew Gene Brown
 - `spatSample<SpatRaster>(method="regular", xy=TRUE)` ignored the second "size" number when using two numbers (row, col) [#1766](https://github.com/rspatial/terra/issues/1766) by Barnabas Harris
 - `plet<SpatRaster>` failed when trying to display multiple layers [#1787](https://github.com/rspatial/terra/issues/1787) by Emanuele Cordano
+- `plotRGB` with scale=1 failed [#1789](https://github.com/rspatial/terra/issues/1789) by Jean-Luc Dupouey
 
 ## enhancements
 

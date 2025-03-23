@@ -97,7 +97,7 @@ SpatGeom getPolygonsGeom2(OGRGeometry *poGeometry) {
 }
 
 
-SpatVector SpatVector::buffer3(std::vector<double> d, unsigned quadsegs) {
+SpatVector SpatVector::buffer3(std::vector<double> d, size_t quadsegs) {
 
 	SpatVector out;
 	recycle(d, size());

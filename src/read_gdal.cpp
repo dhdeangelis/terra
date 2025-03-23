@@ -263,7 +263,7 @@ bool GetVAT(std::string filename, SpatCategories &vat) {
 	std::vector<std::string> nms = v.df.get_names();
 	std::vector<std::string> ss = {"count", "histogram"};
 
-	std::vector<unsigned> rng;
+	std::vector<size_t> rng;
 	rng.reserve(nms.size());
 
 	for (size_t i=0; i<nms.size(); i++) {
@@ -1006,7 +1006,7 @@ bool SpatRaster::constructFromFile(std::string fname, std::vector<int> subds, st
 	s.source_name = basename_noext(fname);
 	std::vector<std::vector<std::string>> bandmeta(s.nlyr);
 	bool getCols = s.nlyr == 3;
-	std::vector<unsigned> rgb_lyrs(3, -99);
+	std::vector<size_t> rgb_lyrs(3, -99);
 
 	s.hasUnit = true;
 	s.hasTime = true;
@@ -1518,8 +1518,8 @@ std::vector<double> SpatRaster::readValuesGDAL(size_t src, size_t row, size_t nr
 
 	GDALRasterBand *poBand;
 
-	unsigned ncell = ncols * nrows;
-	unsigned nl;
+	size_t ncell = ncols * nrows;
+	size_t nl;
 	std::vector<int> panBandMap;
 	if (lyr < 0) {
 		nl = source[src].nlyr;
@@ -2364,7 +2364,7 @@ std::vector<int_64> ncdf_time(const std::vector<std::string> &metadata, std::vec
 			// check for 0..11 range
 			int zero = vmin(raw, true) == 0.0;
 			for (size_t i=0; i<raw.size(); i++) {
-				unsigned m = std::ceil(raw[i] + zero);
+				size_t m = std::ceil(raw[i] + zero);
 				out.push_back(get_time(1970, m, 15, 0, 0, 0));
 			}
 		} else {

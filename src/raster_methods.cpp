@@ -6586,7 +6586,7 @@ SpatRaster SpatRaster::combineCats(SpatRaster x, SpatOptions &opt) {
 				from.push_back(sc.d.iv[1][i]);
 			}
 			opt.names = {sc.d.names[sc.index]};
-			std::vector<unsigned> cr = {0,1};
+			std::vector<size_t> cr = {0,1};
 			sc.d = sc.d.subset_cols(cr);
 			x.source[0].cats[0] = sc;
 			x.source[0].hasCategories[0] = true;

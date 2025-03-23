@@ -275,11 +275,11 @@ std::vector<std::vector<std::string>> sdsmetatdataparsed(std::string filename) {
 
 // [[Rcpp::export(name = ".gdaldrivers")]]
 std::vector<std::vector<std::string>> gdal_drivers() {
-	size_t n = GetGDALDriverManager()->GetDriverCount();
+	int n = GetGDALDriverManager()->GetDriverCount();
 	std::vector<std::vector<std::string>> s(6, std::vector<std::string>(n));
     GDALDriver *poDriver;
     char **papszMetadata;
-	for (size_t i=0; i<n; i++) {
+	for (int i=0; i<n; i++) {
 	    poDriver = GetGDALDriverManager()->GetDriver(i);
 		const char* ss = poDriver->GetDescription();
 		if (ss != NULL ) s[0][i] = ss;
@@ -455,7 +455,7 @@ std::vector<double> percRank(std::vector<double> x, std::vector<double> y, doubl
 					break;
 				}
 			}
-			double z = (b + 0.5 * t) / nx;
+			double z = ((double)b + 0.5 * (double)t) / (double)nx;
 			if (tail == 1) { // both
 				if (z > 0.5) {
 					z = 2 * (1 - z);
@@ -491,7 +491,7 @@ void clearVSIcache(bool vsi) {
 // [[Rcpp::export(name = ".setGDALCacheSizeMB")]]
 void setGDALCacheSizeMB(double x, bool vsi) {
 	if (vsi) {
-		int64_t v = x * 1024 * 1024;
+		int64_t v = (int64_t)x * 1024 * 1024;
 		CPLSetConfigOption("CPL_VSIL_CURL_CACHE_SIZE", std::to_string(v).c_str());
 	} else {
 		GDALSetCacheMax64(static_cast<int64_t>(x) * 1024 * 1024);
@@ -589,7 +589,7 @@ double pearson_cor(std::vector<double> x, std::vector<double> y, bool narm) {
  
 	if (narm) {
 		size_t n = x.size()-1;
-		for (long i=n; i >= 0; i--) {
+		for (long i=(long)n; i >= 0; i--) {
 			if (std::isnan(x[i]) || std::isnan(y[i])) {
 				x.erase(x.begin()+i);
 				y.erase(y.begin()+i);
@@ -600,8 +600,8 @@ double pearson_cor(std::vector<double> x, std::vector<double> y, bool narm) {
 		}
 	}
 	size_t n = x.size();
-	double xbar = accumulate(x.begin(), x.end(), 0.0) / n;
-	double ybar = accumulate(y.begin(), y.end(), 0.0) / n;
+	double xbar = accumulate(x.begin(), x.end(), 0.0) / (double)n;
+	double ybar = accumulate(y.begin(), y.end(), 0.0) / (double)n;
 	double numer = 0;
 	for (size_t i=0; i<n; i++) {
 		numer += (x[i]-xbar) * (y[i]-ybar);
@@ -622,7 +622,7 @@ double weighted_pearson_cor(std::vector<double> x, std::vector<double> y, std::v
   
 	if (narm) {
 		size_t n = x.size()-1;
-		for (long i=n; i >= 0; i--) {
+		for (long i=(long)n; i >= 0; i--) {
 			if (std::isnan(x[i]) || std::isnan(y[i])) {
 				x.erase(x.begin()+i);
 				y.erase(y.begin()+i);
@@ -664,13 +664,13 @@ Rcpp::IntegerMatrix uniqueSymmetricRows(std::vector<size_t> x, std::vector<size_
 	size_t n = x.size();
 	for (size_t i=0; i<n; i++) {
 		if (x[i] > y[i]) {
-			double tmp = x[i];
+			size_t tmp = x[i];
 			x[i] = y[i];
 			y[i] = tmp;
 		}
 	}
 	sort_unique_2d(x, y);
-	Rcpp::IntegerMatrix mat(x.size(), 2); 
+	Rcpp::IntegerMatrix mat((int)x.size(), 2); 
     std::copy(x.begin(), x.end(), mat.begin());  	
     std::copy(y.begin(), y.end(), mat.begin()+x.size());  	
 	return mat;
